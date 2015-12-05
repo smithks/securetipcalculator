@@ -18,6 +18,7 @@ public class NumberPickerPreference extends DialogPreference {
 
     public NumberPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setDefaultValue(getContext().getResources().getInteger(R.integer.pref_tip_default));
 
     }
 
@@ -56,7 +57,8 @@ public class NumberPickerPreference extends DialogPreference {
      */
     @Override
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue){
-        mCurrValue = restorePersistedValue ? getPersistedInt(R.integer.pref_tip_default) : (int) defaultValue;
+        super.onSetInitialValue(restorePersistedValue,defaultValue);
+        mCurrValue = restorePersistedValue ? getPersistedInt(getContext().getResources().getInteger(R.integer.pref_tip_default)) : (int) defaultValue;
     }
 
     /**

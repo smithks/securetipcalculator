@@ -54,6 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:minEms="1"
+                        android:maxLength="4"
                         android:selectAllOnFocus="true"
                         android:gravity="end"
                         android:background="@drawable/edit_text_border"

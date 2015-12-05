@@ -7,18 +7,18 @@
     <string name="about_menu_action">About Palindrome Tipping</string>
 
     <!-- Preferences -->
-    <string name="pref_is_first_launch_key">firstLaunch</string>
+    <string name="pref_is_first_launch_key" translatable="false">firstLaunch</string>
     <string name="pref_tip_label">Default tip percent</string>
-    <integer name="pref_tip_default">17</integer>
-    <string name="pref_tip_key">defaultTip</string>
+    <integer name="pref_tip_default" translatable="false">17</integer>
+    <string name="pref_tip_key" translatable="false">defaultTip</string>
     <string name="pref_method_label">Calculation method</string>
     <string name="pref_method_default" translatable="false">palindrome</string>
     <string name="pref_method_key" translatable="false">method</string>
-    <string-array name="tipping_method_array_entries">
+    <string-array name="tipping_method_array_entries" translatable="false">
         <item>Normal</item>
         <item>Palindrome</item>
     </string-array>
-    <string-array name="tipping_method_array_vaues">
+    <string-array name="tipping_method_array_vaues" translatable="false">
         <item>normal</item>
         <item>palindrome</item>
     </string-array>
@@ -34,8 +34,8 @@
     <string name="save_button">save to history</string>
     <string name="percent_sign">"%  $"</string>
     <string name="toggle_content_description">Add or remove check split section.</string>
-    <string name="toast_store_successful">Transaction saved to history</string>
-    <string name="toast_store_failed">Sorry! Something went wrong</string>
+    <string name="toast_store_successful">Transaction Saved to History</string>
+    <string name="toast_store_failed">Sorry! Something Went Wrong</string>
     <string name="alert_dialog_toggle_title">Use Normal Calculation to Split Check</string>
     <string name="alert_dialog_toggle_message">We cannot maintain the secure palindrome pattern for each persons total without altering the original total. To split the check, temporarily switch to
                 normal calculation by pressing the corresponding button below or change your default calculation method in settings.</string>
@@ -58,17 +58,18 @@
     <!-- History fragment -->
     <string name="delete_entry_button">Delete entry</string>
     <string name="delete_content_description">Delete the history entry on this line.</string>
-    <string name="toast_delete_successful">History entry deleted</string>
-    <string name="alert_dialog_delete_title">Delete history entry?</string>
-    <string name="alert_dialog_delete_message">Are you sure you want to delete this history entry?</string>
+    <string name="toast_delete_successful">Entry Deleted</string>
+    <string name="alert_dialog_delete_title">Delete History Entry?</string>
+    <string name="alert_dialog_delete_message">Are you sure you want to delete this entry? This action cannot be undone.</string>
     <string name="alert_dialog_delete_positive">Delete</string>
     <string name="alert_dialog_delete_negative">Cancel</string>
     <string name="date_item_today">Today</string>
+    <string name="no_entries_string">No history to display. \nSave a total from the calculator page to have it appear here!</string>
 
     <!-- Demo screen -->
     <string name="demo_summary_string">Make your restaurant transactions easily recognizable! \n\nType in your bill amount and ideal
-        tip percentage and we do the rest! Here\'s an example of the pattern.</string>
-    <string name="demo_summary2_string">See the about page for more info! \n\nTap to get started!</string>
+        tip percentage and we calculate your total using our secure pattern.</string>
+    <string name="demo_summary2_string">See the about page for a description of the pattern! \n\nTap to get started!</string>
 
     <!-- About activity -->
     <string name="example_content_description">Example of palindrome tipping</string>

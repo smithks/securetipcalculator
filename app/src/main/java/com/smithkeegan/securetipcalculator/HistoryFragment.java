@@ -42,6 +42,7 @@ public class HistoryFragment extends Fragment {
     private SimpleDateFormat dateFormat;
     private SimpleDateFormat timeFormat;
     private DecimalFormat decimalFormat;
+    private TextView mNoHistoryView;
     private SQLiteDatabase db;
     private Context mContext;
 
@@ -54,6 +55,7 @@ public class HistoryFragment extends Fragment {
         dateFormat = (SimpleDateFormat)SimpleDateFormat.getDateInstance();
         timeFormat = (SimpleDateFormat)SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
         decimalFormat = new DecimalFormat("#0.00");
+        mNoHistoryView = (TextView) rootView.findViewById(R.id.no_entries_text);
         refreshHistory();
         return rootView;
     }
@@ -124,8 +126,6 @@ public class HistoryFragment extends Fragment {
          */
         @Override
         protected void onPostExecute(final Cursor result){
-            //if (result == null || context == null)
-                //return;
             String[] fromColumns = new String[] {HistoryEntry._ID, HistoryEntry.COLUMN_DATE, HistoryEntry.COLUMN_EACH_PAYS};
             int[] toViews = new int[]{R.id.clear_button,R.id.date_layout,R.id.paid_textView};
             adapter = new SimpleCursorAdapter(context,R.layout.history_listview_item,result,fromColumns,toViews,SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
@@ -180,6 +180,13 @@ public class HistoryFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+
+            //Show or hide history string
+            if(result.getCount()==0)
+                mNoHistoryView.setVisibility(View.VISIBLE);
+            else
+                mNoHistoryView.setVisibility(View.INVISIBLE);
+
         }
 
     }

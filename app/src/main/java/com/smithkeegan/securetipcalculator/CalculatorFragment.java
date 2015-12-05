@@ -63,6 +63,7 @@ public class CalculatorFragment extends Fragment {
     private Boolean mSplitCheckDisplayed; //Denotes if the split check layout is being displayed
     private Boolean mIgnoreTextChange;  //Flags the textChange listener to not update (used when a field is set programmatically)
     private Boolean mMethodChanged; //If tip method changes on screen load clear fields and lock fields appropriately.
+    private Boolean mDefaultTipChanged;
     private Boolean mOverrideTipMethod; //Called if user temporarily changes tip method
 
     /**
@@ -176,6 +177,7 @@ public class CalculatorFragment extends Fragment {
 
         mIgnoreTextChange = false;
         mMethodChanged = false;
+        mDefaultTipChanged = false;
         resetTextFields(); //Set fields to default values
         updateFieldProperties();
     }
@@ -206,10 +208,11 @@ public class CalculatorFragment extends Fragment {
      */
     public void refreshCalculator(){
         pullPreferenceValues();
-        if (mMethodChanged) {
+        if (mMethodChanged || mDefaultTipChanged) { //If returning from settings and a value was changed
             resetTextFields();
             updateFieldProperties();
             mMethodChanged = false;
+            mDefaultTipChanged = false;
         }
     }
 
@@ -296,7 +299,10 @@ public class CalculatorFragment extends Fragment {
      */
     private void pullPreferenceValues(){
         SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        DEFAULT_TIP = Integer.toString(sPref.getInt(getString(R.string.pref_tip_key), R.integer.pref_tip_default));
+        String newDefault = Integer.toString(sPref.getInt(getResources().getString(R.string.pref_tip_key), getResources().getInteger(R.integer.pref_tip_default)));
+        if (DEFAULT_TIP != null && !DEFAULT_TIP.equals(newDefault))
+            mDefaultTipChanged = true;
+        DEFAULT_TIP = newDefault;
         if (!mOverrideTipMethod) {
             String newMethod = sPref.getString(getString(R.string.pref_method_key), getString(R.string.pref_method_default));
             if (TIP_METHOD != null) //If this is not the initial preference load
@@ -369,7 +375,7 @@ public class CalculatorFragment extends Fragment {
             eachPays = updateEachPays(total, people);
         }
 
-        if(eachPays > 0)
+        if(total > 0)
             enableButton(mSaveButton);
         else
             disableButton(mSaveButton);

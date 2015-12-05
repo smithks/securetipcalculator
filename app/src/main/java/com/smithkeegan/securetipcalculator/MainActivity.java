@@ -84,13 +84,18 @@ public class MainActivity extends AppCompatActivity {
         //if(mSPref.getBoolean(getString(R.string.pref_is_first_launch_key),true))
             showWelcomeDemo();
 
-        AdView adView = (AdView) findViewById(R.id.main_ad_view);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("90B00D7879E8259B432B66C66559001B")
-                .build();
-        adView.loadAd(adRequest);
+        if (!isPro()) {
+            AdView adView = (AdView) findViewById(R.id.main_ad_view);
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                    .addTestDevice("90B00D7879E8259B432B66C66559001B")
+                    .build();
+            adView.loadAd(adRequest);
+        }
+    }
 
+    public boolean isPro(){
+        return this.getPackageName().equals("com.smithkeegan.securetipcalculator.pro");
     }
 
     @Override

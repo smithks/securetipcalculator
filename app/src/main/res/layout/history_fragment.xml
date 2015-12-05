@@ -8,4 +8,16 @@
         android:layout_height="match_parent"
         android:id="@+id/history_listview"/>
 
+    <TextView
+        android:id="@+id/no_entries_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_entries_string"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textSize="18sp"
+        android:layout_margin="20dp"/>
+
 </RelativeLayout>
