@@ -25,6 +25,7 @@ import com.google.android.gms.ads.AdView;
 /**
  * Parent activity that contains viewpager for the secure tipping app. View pager contains two
  * fragments, the calculator and a history fragment.
+ *
  * @author Keegan Smith
  * @since 12/1/2015
  */
@@ -91,15 +92,18 @@ public class MainActivity extends AppCompatActivity {
                     .addTestDevice("90B00D7879E8259B432B66C66559001B")
                     .build();
             adView.loadAd(adRequest);
+
+            //Move up viewPager to allow room for adView
+            ((RelativeLayout.LayoutParams)mViewPager.getLayoutParams()).addRule(RelativeLayout.ABOVE,R.id.main_ad_view);
         }
     }
 
-    public boolean isPro(){
+    public boolean isPro() {
         return this.getPackageName().equals("com.smithkeegan.securetipcalculator.pro");
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
-        } else if( id == R.id.action_about){
+        } else if (id == R.id.action_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
             return true;
@@ -133,14 +137,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Displays the welcome demo if this is the first time running the app.
      */
-    public void showWelcomeDemo(){
+    public void showWelcomeDemo() {
         final Dialog dialog = new Dialog(this, android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(R.layout.demo_layout);
         RelativeLayout layout = (RelativeLayout) dialog.findViewById(R.id.transparent_demo);
 
         //Only show the demo on first launch
         SharedPreferences.Editor editor = mSPref.edit();
-        editor.putBoolean(getString(R.string.pref_is_first_launch_key),false);
+        editor.putBoolean(getString(R.string.pref_is_first_launch_key), false);
         editor.apply();
 
         layout.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position ==0) return new CalculatorFragment();
+            if (position == 0) return new CalculatorFragment();
             else return new HistoryFragment();
         }
 
@@ -188,23 +192,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position){
+        public Object instantiateItem(ViewGroup container, int position) {
             Fragment fragment = (Fragment) super.instantiateItem(container, position);
-            registeredFragments.put(position,fragment);
+            registeredFragments.put(position, fragment);
             return fragment;
         }
+
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object){
+        public void destroyItem(ViewGroup container, int position, Object object) {
             registeredFragments.remove(position);
             super.destroyItem(container, position, object);
         }
 
         /**
          * For use in viewpager to get a fragment from the adapter.
+         *
          * @param position position to return
          * @return the requested fragment
          */
-        public Fragment getRegisteredFragment(int position){
+        public Fragment getRegisteredFragment(int position) {
             return registeredFragments.get(position);
         }
     }

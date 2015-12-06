@@ -50,6 +50,7 @@ public class CalculatorFragment extends Fragment {
     private DecimalFormat mDecimalFormat = new DecimalFormat("#0.00");
 
     private RelativeLayout mSplitCheckLayout;
+    private RelativeLayout mSplitButtonLayout;
     private EditText mBillAmountEdit;
     private EditText mTipPercentEdit;
     private EditText mTipAmountEdit;
@@ -85,6 +86,7 @@ public class CalculatorFragment extends Fragment {
      */
     private void initializeFields(final View rootView){
         mSplitCheckLayout = (RelativeLayout) rootView.findViewById(R.id.split_check_layout);
+        mSplitButtonLayout = (RelativeLayout) rootView.findViewById(R.id.split_button_layout);
 
         mBillAmountEdit = (EditText) rootView.findViewById(R.id.bill_amount_edit);
         mTipPercentEdit = (EditText) rootView.findViewById(R.id.tip_percent_edit);
@@ -224,9 +226,11 @@ public class CalculatorFragment extends Fragment {
         if (TIP_METHOD.equals(TIPPING_METHODS[0])){ //normal
             enableView(mTipAmountEdit);
             enableView(mTotalAmountEdit);
+            ((RelativeLayout.LayoutParams)mSplitButtonLayout.getLayoutParams()).addRule(RelativeLayout.BELOW,R.id.base_calc_layout);
         } else if(TIP_METHOD.equals(TIPPING_METHODS[1])){ //palindrome
             disableView(mTipAmountEdit);
             disableView(mTotalAmountEdit);
+            ((RelativeLayout.LayoutParams)mSplitButtonLayout.getLayoutParams()).addRule(RelativeLayout.BELOW, R.id.rounding_warning_text);
         }
     }
 
