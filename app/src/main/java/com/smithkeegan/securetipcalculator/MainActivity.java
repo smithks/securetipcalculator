@@ -86,15 +86,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Show welcome demo if this is the first launch
         mSPref = PreferenceManager.getDefaultSharedPreferences(this);
-        //if(mSPref.getBoolean(getString(R.string.pref_is_first_launch_key),true))
+        if(mSPref.getBoolean(getString(R.string.pref_is_first_launch_key),true))
             showWelcomeDemo();
 
         if (!isPro()) {
             AdView adView = (AdView) findViewById(R.id.main_ad_view);
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice("90B00D7879E8259B432B66C66559001B")
-                    .build();
+            AdRequest adRequest = new AdRequest.Builder().build();
             adView.loadAd(adRequest);
 
             //Move up viewPager to allow room for adView
