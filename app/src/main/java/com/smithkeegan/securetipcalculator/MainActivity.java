@@ -1,8 +1,11 @@
 package com.smithkeegan.securetipcalculator;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
@@ -13,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if(isPro()){
+            MenuItem item = menu.findItem(R.id.action_upgrade);
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -128,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
+            return true;
+        } else if(id == R.id.action_upgrade){
+            showUpgradeDialog();
             return true;
         }
 
@@ -155,6 +166,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    /**
+     * Shows the upgrade to pro dialog that will link user to play store.
+     */
+    public void showUpgradeDialog(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        View dialogView = inflater.inflate(R.layout.dialog_upgrade, null);
+        dialogView.findViewById(R.id.upgrade_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://apps/collection/editors_choice"));
+                //Try to launch directly to Google Play
+                if(intent.resolveActivity(getPackageManager()) != null)
+                    startActivity(intent);
+                else { //If unavailable let user choose
+                    intent.setData(Uri.parse("http://play.google.com/store/apps/collection/editors_choice"));
+                    startActivity(intent);
+                }
+            }
+        });
+        builder.setView(dialogView)
+                .setNegativeButton(R.string.upgrade_negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.show();
     }
 
     /**
