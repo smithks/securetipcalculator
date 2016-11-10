@@ -296,6 +296,7 @@ public class CalculatorFragment extends Fragment {
         mEachPaysEdit.setText(formattedZero);
         disableButton(mSaveButton);
         mIgnoreTextChange = false;
+        mPercentWarningText.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -525,13 +526,6 @@ public class CalculatorFragment extends Fragment {
         dialog.setNeutralButton(getResources().getString(R.string.alert_dialog_toggle_neutral), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                TIP_METHOD = TIPPING_METHODS[0]; //Set tipping method to normal for duration of this activity
-                mOverrideTipMethod = true;
-                updateFields(mBillAmountEdit); //Recalculate fields based on bill amount
-                updateFieldProperties();
-                mSplitCheckLayout.setVisibility(View.VISIBLE);
-                mToggleSplitButton.setImageResource(R.drawable.ic_remove_circle_black_24dp);
-                mSplitCheckDisplayed = true;
                 dialog.dismiss();
             }
         });
@@ -539,6 +533,13 @@ public class CalculatorFragment extends Fragment {
         dialog.setPositiveButton(getResources().getString(R.string.alert_dialog_toggle_positive), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                TIP_METHOD = TIPPING_METHODS[0]; //Set tipping method to normal for duration of this activity
+                mOverrideTipMethod = true;
+                updateFields(mBillAmountEdit); //Recalculate fields based on bill amount
+                updateFieldProperties();
+                mSplitCheckLayout.setVisibility(View.VISIBLE);
+                mToggleSplitButton.setImageResource(R.drawable.ic_remove_circle_black_24dp);
+                mSplitCheckDisplayed = true;
                 dialog.dismiss();
             }
         });

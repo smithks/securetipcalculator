@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
 
-            /**
+            /**w
              * Refreshes the listView in the history fragment whenever the user moves to it.
              * @param position page index moving to
              */
@@ -177,12 +177,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("market://apps/collection/editors_choice"));
+                intent.setData(Uri.parse("market://details?id=com.smithkeegan.securetipcalculator.pro"));
                 //Try to launch directly to Google Play
                 if(intent.resolveActivity(getPackageManager()) != null)
                     startActivity(intent);
                 else { //If unavailable let user choose
-                    intent.setData(Uri.parse("http://play.google.com/store/apps/collection/editors_choice"));
+                    intent.setData(Uri.parse("http://play.google.com/store/apps/details?id=com.smithkeegan.securetipcalculator.pro"));
                     startActivity(intent);
                 }
             }

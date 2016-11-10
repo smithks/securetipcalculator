@@ -38,12 +38,13 @@
     <string name="toast_store_successful">Transaction saved to history.</string>
     <string name="toast_store_failed">Sorry! Something went wrong.</string>
     <string name="alert_dialog_toggle_title">Use Normal Calculation to Split Check</string>
-    <string name="alert_dialog_toggle_message">We cannot maintain the secure palindrome pattern for each persons total without altering the original total. To split the check, temporarily switch to
-                normal calculation by pressing the corresponding button below or change your default calculation method in settings.</string>
-    <string name="alert_dialog_toggle_positive">OK</string>
-    <string name="alert_dialog_toggle_neutral">Use normal calculation</string>
+    <string name="alert_dialog_toggle_message">We cannot maintain the secure palindrome pattern for each person\'s total without altering the original total. To split the check, switch to normal calculation.</string>
+    <string name="alert_dialog_toggle_neutral">Cancel</string>
+    <string name="alert_dialog_toggle_positive">Use normal calculation</string>
     <string name="picker_dialog_percent_title">Tip percentage</string>
     <string name="picker_dialog_people_title">Number of people</string>
+    <string name="picker_dialog_cancel">CANCEL</string>
+    <string name="picker_dialog_ok">OK</string>
     <string name="rounding_warning">*Actual tip percentage used to reach pattern: %1$s%%</string>
 
     <!-- Detail activity -->
