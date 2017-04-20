@@ -33,8 +33,6 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
-//TODO edit button appearance, make purple color?
-//TODO include about page describing each method, indicate why methods may not be the best for lower/larger amounts (large descrepancy in tip percent vs actual tip percent)
 /**
  * Calculator fragment displayed within viewpager.
  * @author Keegan Smith
